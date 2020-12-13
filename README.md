@@ -1,2 +1,2 @@
-# discord-bot
-A simple script letting users repeatedly send a message in a Discord channel.
+# Discord Auto Message
+A crude script letting users repeatedly send a message in a Discord channel, complete with variable random sleep times to appear more humanly.
