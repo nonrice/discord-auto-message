@@ -4,6 +4,7 @@ from json import dumps
 from time import sleep
 from random import random
 
+# a bunch of code to manage filling out info and remembering it for next time in a file.
 file = open("info.txt")
 text = file.read().splitlines()
 
@@ -24,8 +25,6 @@ if len(text) != 4 or input("Configure bot? (y/n)") == "y":
 
     file.close()
 
-
-
 header_data = {
     "content-type": "application/json",
     "user-agent": text[0],
@@ -36,10 +35,11 @@ header_data = {
 
 print("Messages will be sent to " + header_data["referrer"] + ".")
 
+# connects to Discord
 def get_connection():
     return HTTPSConnection("discordapp.com", 443)
 
-
+# this function sends the message. This sends the same POST request that is sent when you send a message using the Discord App/Website.
 def send_message(conn, channel_id, message_data):
     try:
         conn.request("POST", f"/api/v6/channels/{channel_id}/messages", message_data, header_data)
@@ -58,7 +58,7 @@ def send_message(conn, channel_id, message_data):
         for key in header_data:
             print(key + ": " + header_data[key])
 
-
+# simply combines all of the previous functions into a usuable message sender
 def main(msg):
     message_data = {
         "content": msg, # message goes here
@@ -67,13 +67,14 @@ def main(msg):
 
     send_message(get_connection(), text[3], dumps(message_data))
 
-
+# some user prompts that ask for what he/she would like to send, how long to wait, etc. etc.
 if __name__ == '__main__':
     message = input("Message to send: ")
     messages = int(input("Amount of messages: "))
     main_wait = int(input("Seconds between messages: "))
     human_margin = int(input("Human error margin: "))
 
+    # where the messages actually get sent
     for i in range(0,messages):
         main(message)
         print("Estimated time to complete: " + str((messages-i) * (human_margin // 2 + main_wait) // 60) + " minutes.")
