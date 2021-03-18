@@ -2,9 +2,10 @@ from http.client import HTTPSConnection
 from sys import stderr
 from json import dumps
 from time import sleep
-from random import random
+from datetime import datetime
 
-# a bunch of code to manage filling out info and remembering it for next time in a file.
+
+
 file = open("info.txt")
 text = file.read().splitlines()
 
@@ -35,51 +36,74 @@ header_data = {
 
 print("Messages will be sent to " + header_data["referrer"] + ".")
 
-# connects to Discord
-def get_connection():
+def connect():
     return HTTPSConnection("discordapp.com", 443)
 
-# this function sends the message. This sends the same POST request that is sent when you send a message using the Discord App/Website.
-def send_message(conn, channel_id, message_data):
-    try:
-        conn.request("POST", f"/api/v6/channels/{channel_id}/messages", message_data, header_data)
-        resp = conn.getresponse()
-
-        if 199 < resp.status < 300:
-            print("Message sent!")
-            pass
-
-        else:
-            stderr.write(f"Received HTTP {resp.status}: {resp.reason}\n")
-            pass
-
-    except:
-        stderr.write("Failed to send_message\n")
-        for key in header_data:
-            print(key + ": " + header_data[key])
-
-# simply combines all of the previous functions into a usuable message sender
-def main(msg):
+def send_message(conn, channel_id, message):
     message_data = {
-        "content": msg, # message goes here
-        "tts": "false",
+        "content": message,
+        "tts": False
     }
 
-    send_message(get_connection(), text[3], dumps(message_data))
+    try:
+        conn.request("POST", f"/api/v6/channels/{channel_id}/messages", dumps(message_data), header_data)
+        resp = conn.getresponse()
+        if 199 < resp.status < 300:
+            pass
+        else:
+            stderr.write(f"While sending message, received HTTP {resp.status}: {resp.reason}\n")
+            pass
+    except:
+        stderr.write("Failed to send_message\n")
 
-# some user prompts that ask for what he/she would like to send, how long to wait, etc. etc.
-if __name__ == '__main__':
-    message = input("Message to send: ")
-    messages = int(input("Amount of messages: "))
-    main_wait = int(input("Seconds between messages: "))
-    human_margin = int(input("Human error margin: "))
+def check_embed(conn, channel_id, target):
 
-    # where the messages actually get sent
-    for i in range(0,messages):
-        main(message)
-        print("Estimated time to complete: " + str((messages-i) * (human_margin // 2 + main_wait) // 60) + " minutes.")
-        print("Iteration " + str(i) + " complete.")
-        sleep(main_wait)
-        sleep(random()*human_margin)
+    channel = conn.request("GET", f"/api/v6/channels/{channel_id}/messages", headers=header_data)
+    resp = conn.getresponse()
 
-    print("Session complete! " + str(messages) + " messages sent.")
+    if 199 < resp.status < 300:
+        resp_string = str(resp.read(500))
+        if target in resp_string:
+            return True
+        return False
+    else:
+        stderr.write(f"While checking message, received HTTP {resp.status}: {resp.reason}\n")
+        pass
+
+def cycle(route, target_pk, catch_move_id, kill_move_id, ball_name, box_id):
+    sleep(2)
+    send_message(connect(), text[3], (".route " + route))
+    sleep(1)
+
+    if check_embed(connect(), text[3], target_pk):
+        send_message(connect(), text[3], catch_move_id)
+        sleep(7)
+
+        while check_embed(connect(), text[3], target_pk):
+            send_message(connect(), text[3], ball_name)
+            sleep(7)
+
+        print("Caught a " + target_pk + "! " + (datetime.now()).strftime("%H:%M:%S"))
+        send_message(connect(), text[3], (".boxswap " + box_id + " " + target_pk))
+        return True
+
+    else:
+        send_message(connect(), text[3], kill_move_id)
+        return False
+
+def main():
+    pokemon = input("Pokemon to catch: ")
+    ball = input("Ball to use: ")
+    box = input("Box to store Pokemon: ")
+    route = input("Pokemon route: ")
+    amount = input("Amount of this pokemon to catch: ")
+
+    print("Looking for " + pokemon + "... " + (datetime.now()).strftime("%H:%M:%S"))
+    counter = 0
+    while counter < int(amount):
+        if cycle(route, pokemon, "1", "4", ball, box):
+            counter += 1
+
+    print("Finished catching " + amount + " " + pokemon + "! " + (datetime.now()).strftime("%H:%M:%S"))
+
+main()
