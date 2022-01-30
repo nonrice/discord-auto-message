@@ -1,6 +1,8 @@
 # Discord Auto Message
 A crude script letting users repeatedly send a message in a Discord channel, complete with variable random sleep times to appear more humanly.
 
+![cool image](https://i.ibb.co/QPx1fHW/dbotdemo.jpg)
+
 ## How to Use
 1. Download the code and unzip it.
 2. Open the Command Line and navigate to inside the folder `discord_bot`.
