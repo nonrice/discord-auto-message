@@ -9,4 +9,6 @@ A crude script letting users repeatedly send a message in a Discord channel, com
 3. Run the Python file. Type `python3 dbot.py` in the Command Line. `python3 dbot.py --help` will show all options availible.
 5. Follows the instructions given on the script, and fill out the information necessary. Make sure it is 100% correct. The bot has a feature that stores necessary data in a file so you do not need to keep filling it out.
 
+[Made by @nonrice on Github.](https://github.com/nonrice)
+
 **Use at your own risk.**
