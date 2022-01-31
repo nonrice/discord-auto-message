@@ -7,10 +7,7 @@ from random import random
 file = open("info.txt")
 text = file.read().splitlines()
 
-if len(text) != 4 or input("Configure bot? (y/n)") == "y":
-    if len(text) != 4:
-        print("An error was found inside the info file (possibly your first time using?), reconfiguring is required.")
-    print("Refer to Google if some of these parameters are unfamiliar. It should yield more than usable results.")
+if len(sys.argv) > 1 and sys.argv[1] == "--setall" and input("Configure bot? (y/n)") == "y":
     file.close()
     file = open("info.txt", "w")
     text = []
@@ -23,9 +20,47 @@ if len(text) != 4 or input("Configure bot? (y/n)") == "y":
         file.write(parameter + "\n")
 
     file.close()
+    exit()
+elif len(sys.argv) > 1 and sys.argv[1] == "--setchannel" and input("Set channel? (y/n)") == "y":
+    user_agent = text[0]
+    token = text[1]
+    text = text[0:2]
+    file.close()
+    file = open("info.txt", "w")
+    text.append(input("Discord channel URL: "))
+    text.append(input("Discord channel ID: "))
+    for parameter in text:
+        file.write(parameter + "\n")
 
+    file.close()
+    exit()
+elif len(sys.argv) > 1 and sys.argv[1] == "--setauth" and input("Set authentication? (y/n)") == "y":
+    channelurl = text[2]
+    channelid = text[3]
+    text = text[2:4]
+    file.close()
+    file = open("info.txt", "w")
+    text.insert(input("Discord token: "))
+    text.insert(input("User agent: "))
+    for parameter in text:
+        file.write(parameter + "\n")
 
+    file.close()
+    exit()
+elif len(sys.argv) > 1 and sys.argv[1] == "--help":
+    print("Showing help for discord-auto-message")
+    print("Usage:")
+    print("  'python3 dbot.py'  :  Runs the autotyper. Fill in the messages and wait times.")
+    print("  'python3 dbot.py --setall'  :  Configure all settings.")
+    print("  'python3 dbot.py --setchannel'  :  Set channel to send message to. Includes Channel ID and Channel URL")
+    print("  'python3 dbot.py --setauth'  :  Set authentication. Includes User Token and User Agent")
+    print("  'python3 dbot.py --help'  :  Show help")
+    exit()
 
+if len(text) != 4:
+    print("An error was found inside the user information file. Run the script with the Set All flag ('python3 dbot.py --setall') to reconfigure.")
+    exit()
+    
 header_data = {
     "content-type": "application/json",
     "user-agent": text[0],
