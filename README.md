@@ -11,4 +11,3 @@ A crude script letting users repeatedly send a message in a Discord channel, com
 
 [Made by @nonrice on Github.](https://github.com/nonrice)
 
-**Use at your own risk.**
