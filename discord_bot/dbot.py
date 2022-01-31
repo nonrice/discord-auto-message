@@ -50,11 +50,11 @@ elif len(sys.argv) > 1 and sys.argv[1] == "--setauth" and input("Set authenticat
 elif len(sys.argv) > 1 and sys.argv[1] == "--help":
     print("Showing help for discord-auto-message")
     print("Usage:")
-    print("  'python3 dbot.py'  :  Runs the autotyper. Fill in the messages and wait times.")
-    print("  'python3 dbot.py --setall'  :  Configure all settings.")
+    print("  'python3 dbot.py'               :  Runs the autotyper. Fill in the messages and wait times.")
+    print("  'python3 dbot.py --setall'      :  Configure all settings.")
     print("  'python3 dbot.py --setchannel'  :  Set channel to send message to. Includes Channel ID and Channel URL")
-    print("  'python3 dbot.py --setauth'  :  Set authentication. Includes User Token and User Agent")
-    print("  'python3 dbot.py --help'  :  Show help")
+    print("  'python3 dbot.py --setauth'     :  Set authentication. Includes User Token and User Agent")
+    print("  'python3 dbot.py --help'        :  Show help")
     exit()
 
 if len(text) != 4:
