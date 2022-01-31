@@ -1,5 +1,5 @@
 from http.client import HTTPSConnection
-from sys import stderr
+import sys
 from json import dumps
 from time import sleep
 from random import random
@@ -85,18 +85,18 @@ def send_message(conn, channel_id, message_data):
             pass
 
         else:
-            stderr.write(f"Received HTTP {resp.status}: {resp.reason}\n")
+            sys.stderr.write(f"Received HTTP {resp.status}: {resp.reason}\n")
             pass
 
     except:
-        stderr.write("Failed to send_message\n")
+        sys.stderr.write("Failed to send_message\n")
         for key in header_data:
             print(key + ": " + header_data[key])
 
 
 def main(msg):
     message_data = {
-        "content": msg, # message goes here
+        "content": msg,
         "tts": "false",
     }
 
