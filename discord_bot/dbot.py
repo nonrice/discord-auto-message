@@ -61,6 +61,9 @@ if len(text) != 4:
     print("An error was found inside the user information file. Run the script with the 'Set All' flag ('python3 dbot.py --setall') to reconfigure.")
     exit()
     
+if len(sys.argv) > 1:
+    exit()
+    
 header_data = {
     "content-type": "application/json",
     "user-agent": text[0],
