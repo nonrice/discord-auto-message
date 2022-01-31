@@ -40,8 +40,8 @@ elif len(sys.argv) > 1 and sys.argv[1] == "--setauth" and input("Set authenticat
     text = text[2:4]
     file.close()
     file = open("info.txt", "w")
-    text.insert(input("Discord token: "))
-    text.insert(input("User agent: "))
+    text.insert(0, input("Discord token: "))
+    text.insert(0, input("User agent: "))
     for parameter in text:
         file.write(parameter + "\n")
 
