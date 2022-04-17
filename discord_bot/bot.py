@@ -50,15 +50,15 @@ elif len(sys.argv) > 1 and sys.argv[1] == "--setauth" and input("Set authenticat
 elif len(sys.argv) > 1 and sys.argv[1] == "--help":
     print("Showing help for discord-auto-message")
     print("Usage:")
-    print("  'python3 dbot.py'               :  Runs the autotyper. Fill in the messages and wait times.")
-    print("  'python3 dbot.py --setall'      :  Configure all settings.")
-    print("  'python3 dbot.py --setchannel'  :  Set channel to send message to. Includes Channel ID and Channel URL")
-    print("  'python3 dbot.py --setauth'     :  Set authentication. Includes User Token and User Agent")
-    print("  'python3 dbot.py --help'        :  Show help")
+    print("  'python3 bot.py'               :  Runs the autotyper. Fill in the messages and wait times.")
+    print("  'python3 bot.py --setall'      :  Configure all settings.")
+    print("  'python3 bot.py --setchannel'  :  Set channel to send message to. Includes Channel ID and Channel URL")
+    print("  'python3 bot.py --setauth'     :  Set authentication. Includes User Token and User Agent")
+    print("  'python3 bot.py --help'        :  Show help")
     exit()
 
 if len(text) != 4:
-    print("An error was found inside the user information file. Run the script with the 'Set All' flag ('python3 dbot.py --setall') to reconfigure.")
+    print("An error was found inside the user information file. Run the script with the 'Set All' flag ('python3 bot.py --setall') to reconfigure.")
     exit()
     
 if len(sys.argv) > 1:
