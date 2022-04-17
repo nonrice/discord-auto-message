@@ -3,7 +3,7 @@
 
 A crude script letting users repeatedly send a message in a Discord channel, complete with variable random sleep times to appear more humanly.
 
-![cool image](https://i.ibb.co/QPx1fHW/dbotdemo.jpg)
+![cool image](./screenshot.png)
 
 ## Installation
 Open the command line and clone the repo. Make sure you have Git and Python installed.
