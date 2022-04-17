@@ -1,4 +1,6 @@
 # Discord Auto Message
+**Notice: Though the script still works perfectly to date, I am not maintaining it anymore. Please fork the repo if you would like to add changes yourself.**
+
 A crude script letting users repeatedly send a message in a Discord channel, complete with variable random sleep times to appear more humanly.
 
 ![cool image](https://i.ibb.co/QPx1fHW/dbotdemo.jpg)
