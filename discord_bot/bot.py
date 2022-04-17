@@ -111,11 +111,11 @@ if __name__ == '__main__':
     messages = int(input("Amount of messages: "))
     main_wait = int(input("Seconds between messages: "))
     human_margin = int(input("Human error margin: "))
-
+    print()
     for i in range(0,messages):
         main(message)
         print("Estimated time to complete: " + str((messages-i) * (human_margin // 2 + main_wait) // 60) + " minutes.")
-        print("Iteration " + str(i) + " complete.")
+        print("Iteration " + str(i) + " complete.\n")
         sleep(main_wait)
         sleep(random()*human_margin)
 
