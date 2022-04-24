@@ -6,12 +6,13 @@ A crude script letting users repeatedly send a message in a Discord channel, com
 ![cool image](./screenshot.png)
 
 ## Installation
-Open the command line and clone the repo. Make sure you have Git and Python installed.
+Open the command line and clone the repo. This will require Git to be installed.
 ```
 % git clone https://github.com/nonrice/discord-auto-message
 ```
+If you do not have Git, you may also press the Download button (GitHub) and unzip the code.
 ## Usage
-Navigate inside of the repo to the script, and run it.
+Navigate inside of the repo to the script, and run it. This requires Python to be installed.
 ```
 % cd ./discord-auto-message/discord_bot/
 % python3 bot.py
