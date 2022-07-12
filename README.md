@@ -13,7 +13,7 @@ If you do not have Git, you may also press the Download button (GitHub) and unzi
 ## Usage
 Navigate inside of the repo to the script, and run it. This requires Python to be installed.
 ```
-% cd ./discord-auto-message/discord_bot/
+% cd ~/Downloads/discord-auto-message/discord_bot/
 % python3 bot.py
 ```
 ## Help
