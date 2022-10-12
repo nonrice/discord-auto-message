@@ -107,7 +107,7 @@ def main(msg):
 
 
 if __name__ == '__main__':
-    message = input("Message to send: ")
+    message = sys.stdin.read("Enter your message, when finished press EOF:")
     messages = int(input("Amount of messages: "))
     main_wait = int(input("Seconds between messages: "))
     human_margin = int(input("Human error margin: "))
