@@ -3,6 +3,7 @@ import sys
 from json import dumps
 from time import sleep
 from random import random
+from datetime import datetime, timedelta
 
 file = open("info.txt")
 text = file.read().splitlines()
@@ -111,13 +112,21 @@ if __name__ == '__main__':
     message = sys.stdin.read()
     messages = int(input("Amount of messages: "))
     main_wait = int(input("Seconds between messages: "))
-    human_margin = int(input("Human error margin: "))
+    human_margin = int(input("Human error margin (Seconds): "))
     print()
     for i in range(0,messages):
         main(message)
+        
+        now = datetime.today()
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        print("\n\n===============================================================\n")
         print("Estimated time to complete: " + str((messages-i) * (human_margin // 2 + main_wait) // 60) + " minutes.")
-        print("Iteration " + str(i) + " complete.\n")
+        print("Iteration " + str(i+1) + " complete at "+dt_string+".\n")
+        rnd = random()*human_margin
+        new_time = now + timedelta(seconds=(main_wait+rnd))
+        dt_string = new_time.strftime("%d/%m/%Y %H:%M:%S")
+        print("Next iteration at "+dt_string+".\n")
         sleep(main_wait)
-        sleep(random()*human_margin)
+        sleep(rnd)
 
     print("Session complete! " + str(messages) + " messages sent.")
