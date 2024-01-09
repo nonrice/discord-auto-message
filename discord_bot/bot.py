@@ -119,8 +119,9 @@ if __name__ == '__main__':
         
         now = datetime.today()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        print("\n\n===============================================================\n")
         print("Estimated time to complete: " + str((messages-i) * (human_margin // 2 + main_wait) // 60) + " minutes.")
-        print("Iteration " + str(i) + " complete at "+dt_string+".\n")
+        print("Iteration " + str(i+1) + " complete at "+dt_string+".\n")
         rnd = random()*human_margin
         new_time = now + timedelta(seconds=(main_wait+rnd))
         dt_string = new_time.strftime("%d/%m/%Y %H:%M:%S")
