@@ -68,19 +68,19 @@ header_data = {
     "content-type": "application/json",
     "user-agent": text[0],
     "authorization": text[1],
-    "host": "discordapp.com",
+    "host": "discord.com",
     "referrer": text[2]
 }
 
 print("Messages will be sent to " + header_data["referrer"] + ".")
 
 def get_connection():
-    return HTTPSConnection("discordapp.com", 443)
+    return HTTPSConnection("discord.com", 443)
 
 
 def send_message(conn, channel_id, message_data):
     try:
-        conn.request("POST", f"/api/v6/channels/{channel_id}/messages", message_data, header_data)
+        conn.request("POST", f"/api/v9/channels/{channel_id}/messages", message_data, header_data)
         resp = conn.getresponse()
 
         if 199 < resp.status < 300:
@@ -107,7 +107,7 @@ def main(msg):
 
 
 if __name__ == '__main__':
-    print("Message to send- when finished, type an EOF character:")
+    print("Message to send- when finished, type an EOF character (use ctrl+z):")
     message = sys.stdin.read()
     messages = int(input("Amount of messages: "))
     main_wait = int(input("Seconds between messages: "))
