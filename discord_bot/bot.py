@@ -107,8 +107,7 @@ def main(msg):
 
 
 if __name__ == '__main__':
-    print("Message to send- when finished, type an EOF character:")
-    message = sys.stdin.read()
+    message = input("Message to send: ")
     messages = int(input("Amount of messages: "))
     main_wait = int(input("Seconds between messages: "))
     human_margin = int(input("Human error margin: "))
